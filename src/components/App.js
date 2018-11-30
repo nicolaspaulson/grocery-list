@@ -127,7 +127,7 @@ const App = () => {
   return (
     <div className="App">
       <TodosContext.Provider value={{ todos, dispatch }}>
-        <Title>React Hooks Todo</Title>
+        <Title>Grocery Buddy!</Title>
         <Router>
           <div>
             <Navigation authUser={authUser} />
