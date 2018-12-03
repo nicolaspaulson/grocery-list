@@ -2,6 +2,7 @@ import React, { useState, useReducer, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
+  Redirect
  } from "react-router-dom";
 import { firebase } from "../firebase"
 import { database } from "../firebase/firebase"
@@ -18,10 +19,10 @@ import "./App.css";
 import CreateBox from "./CreateBox";
 import TodoList from "./TodoList";
 import shortid from "shortid";
-import ls from "local-storage";
 import styled from "react-emotion";
 
 export const TodosContext = React.createContext([]);
+export const UserContext = React.createContext(null);
 
 const setTodoKeyByIndex = ({ todos, key, value, index }) => [
   ...todos.slice(0, index),
@@ -123,51 +124,61 @@ const App = () => {
       todo
     });
   };
-
+//console.log(props)
   return (
-    <div className="App">
-      <TodosContext.Provider value={{ todos, dispatch }}>
-        <Title>Grocery Buddy!</Title>
-        <Router>
-          <div>
-            <Navigation authUser={authUser} />
+    <div className="App" /*style={mainStyle}*/>
+      <UserContext.Provider value={authUser}>
+        <TodosContext.Provider value={{ todos, dispatch }}>
+          <Title>Grocery Buddy!</Title>
+          <Router>
+            <div>
+              <Navigation authUser={authUser} />
 
-            <hr/>
+              <hr/>
 
-            <Route
-              exact path={routes.LANDING}
-              component={LandingPage}
-            />
-            <Route
-              exact path={routes.SIGN_UP}
-              component={SignUpPage}
-            />
-            <Route
-              exact path={routes.SIGN_IN}
-              component={SignInPage}
-            />
-            <Route
-              exact path={routes.PASSWORD_FORGET}
-              component={PasswordForgetPage}
-            />
-            <Route
-              exact path={routes.HOME}
-              component={HomePage}
-            />
-            <Route
-              exact path={routes.ACCOUNT}
-              component={AccountPage}
-            />
-          </div>
-        </Router>
-        <Description>
-          Full-featured Grocery List app written partly with React Hooks.{" "}
-        </Description>
-        <CreateBox
-          onSubmit={handleSubmit}
-          disabled={authUser ? false : true} />
-        <TodoList todos={todos} />
-      </TodosContext.Provider>
+              <Route
+                exact path={routes.LANDING}
+                render={props => (
+                  <React.Fragment>
+                    <Description>
+                      Full-featured Grocery List app written partly with React Hooks.{" "}
+                    </Description>
+                  </React.Fragment>
+                )}
+              />
+              <Route
+                exact path={routes.SIGN_UP}
+                component={SignUpPage}
+              />
+              <Route
+                exact path={routes.SIGN_IN}
+                component={SignInPage}
+              />
+              <Route
+                exact path={routes.PASSWORD_FORGET}
+                component={PasswordForgetPage}
+              />
+              <Route
+                exact path={routes.HOME}
+                render={props => (
+                  <React.Fragment>
+                    <CreateBox
+                      onSubmit={handleSubmit}
+                      disabled={authUser ? false : true}
+                    />
+                    <TodoList todos={todos} />
+                    {!authUser && <Redirect to={routes.LANDING} />}
+                  </React.Fragment>
+                )}
+              />
+              <Route
+                exact path={routes.ACCOUNT}
+                component={AccountPage}
+              />
+            </div>
+          </Router>
+        </TodosContext.Provider>
+      </UserContext.Provider>
     </div>
   );
 };
@@ -179,5 +190,10 @@ const Title = styled("h1")({
 const Description = styled('p')({
   textAlign: 'center'
 })
+
+// const mainStyle = {
+//   color: '#262121',
+//   background: '#89B3A1'
+// }
 
 export default App;

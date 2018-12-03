@@ -22,7 +22,7 @@ const CreateBox = ({ onSubmit, disabled }) => {
         onChange={handleValueChange}
         onKeyDown={handleEnter}
         disabled={disabled}
-        placeholder={disabled ? "Please log in to use" : "Write a todo and press [Enter]"  }
+        placeholder={disabled ? "Please log in to use" : "List an item and press [Enter]"  }
       />
     </Wrapper>
   );

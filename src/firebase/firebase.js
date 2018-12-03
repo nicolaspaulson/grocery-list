@@ -1,3 +1,4 @@
+import React from 'react'
 import firebase from "firebase/app"
 import "firebase/auth"
 import "firebase/database"
@@ -28,6 +29,14 @@ if (!firebase.apps.length){
   firebase.initializeApp(config);
 }
 
+const FirebaseContext = React.createContext(null);
+
+const withFirebase = Component => props => (
+  <FirebaseContext.Consumer>
+    {firebase => <Component {...props} firebase={firebase} />}
+  </FirebaseContext.Consumer>
+);
+
 const auth = firebase.auth();
 
 const database = firebase.database();
@@ -35,4 +44,5 @@ const database = firebase.database();
 export {
   auth,
   database,
+  withFirebase,
 };
