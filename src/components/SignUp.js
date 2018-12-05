@@ -11,7 +11,7 @@ import styled from 'react-emotion'
 
 const SignUpPage = ({ history }) =>
   <div>
-    <h1>Sign Up</h1>
+    <Subtitle>Sign Up</Subtitle>
     <SignUpForm history={history} />
   </div>
 
@@ -43,37 +43,43 @@ const SignUpForm = ({history}) => {
 
     return (
       authUser ? <Redirect to={routes.HOME} /> :
-      <form onSubmit={onSubmit}>
-        <input
-          value={username}
-          onChange={event => setUsername(event.target.value)}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          value={email}
-          onChange={event => setEmail(event.target.value)}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          value={passwordOne}
-          onChange={event => setPasswordOne(event.target.value)}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          value={passwordTwo}
-          onChange={event => setPasswordTwo(event.target.value)}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign Up
-        </button>
+      <OuterWrapper>
+        <Wrapper onSubmit={onSubmit}>
+          <Input
+            value={username}
+            onChange={event => setUsername(event.target.value)}
+            type="text"
+            placeholder="Full Name"
+          />
+          <p />
+          <Input
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+            type="text"
+            placeholder="Email Address"
+          />
+          <p />
+          <Input
+            value={passwordOne}
+            onChange={event => setPasswordOne(event.target.value)}
+            type="password"
+            placeholder="Password"
+          />
+          <p />
+          <Input
+            value={passwordTwo}
+            onChange={event => setPasswordTwo(event.target.value)}
+            type="password"
+            placeholder="Confirm Password"
+          />
+          <p />
+          <SignUpButton disabled={isInvalid} type="submit">
+            Sign Up
+          </SignUpButton>
 
-        { error && <p>{error.message}</p> }
-      </form>
+          { error && <p>{error.message}</p> }
+        </Wrapper>
+      </OuterWrapper>
     );
   }
 
@@ -83,13 +89,58 @@ const SignUpLink = () =>
     <Link to={routes.SIGN_UP}>Sign Up</Link>
   </Wrapper>
 
-const Wrapper = styled("div")({
+  const Subtitle = styled("h3")({
+    textAlign: "center"
+  });
+
+  const Input = styled("input")({
+    textAlign: 'center',
+    background: "rgba(255,255,255,.3)",
+    padding: 8,
+    border: "3px solid rgb(218, 218, 218)",
+    borderRadius: 6,
+    fontWeight: 600,
+    margin: "-2px 0px -2px -5px",
+    outline: "none"
+  });
+
+  const Wrapper = styled("form")({
     display: "flex",
     width: "100%",
     justifyContent: "center",
     marginTop: 30,
-    marginBottom: 30
+    marginBottom: 30,
+    flexDirection: "column",
+    maxWidth: 400
   });
+
+  const OuterWrapper = styled("div")({
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
+    flexDirection: "row",
+  });
+
+  const SignUpButton = styled("button")({
+    display: "flex",
+    textAlign: "center",
+    justifyContent: "center",
+    fontWeight: 600,
+    border: "3px solid rgb(218, 218, 218)",
+    padding: 5,
+    margin: "-2px 0px -2px -5px",
+    outline: "none",
+    '&:hover':{
+      backgroundColor: "#C0DFA1"
+        },
+    '&:disabled':{
+      backgroundColor: "buttonface",
+      '&:hover': {
+        backgroundColor: "buttonface",
+      }
+    }
+  })
+
 
 export default withRouter(SignUpPage);
 
