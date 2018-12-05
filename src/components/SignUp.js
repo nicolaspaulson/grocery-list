@@ -1,18 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Link,
   withRouter,
+  Redirect,
 } from 'react-router-dom';
+import { UserContext } from './App'
 import { auth } from "../firebase"
 import * as routes from '../constants/routes';
-
-const INITIAL_STATE = {
-  username: '',
-  email: '',
-  passwordOne: '',
-  passwordTwo: '',
-  error: null,
-};
 
 const SignUpPage = ({ history }) =>
   <div>
@@ -20,78 +14,56 @@ const SignUpPage = ({ history }) =>
     <SignUpForm history={history} />
   </div>
 
-const byPropKey = (propertyName, value) => () => ({
-  [propertyName]: value,
-});
+const SignUpForm = ({history}) => {
 
-class SignUpForm extends Component {
-  constructor(props) {
-    super(props);
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [passwordOne, setPasswordOne] = useState('')
+  const [passwordTwo, setPasswordTwo] = useState('')
+  const [error, setError] = useState(null)
 
-    this.state = {...INITIAL_STATE};
+  const authUser = useContext(UserContext)
+
+  const onSubmit = (event) => {
+
+    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+      .catch(error => {
+        setError(error)
+      });
+
+    event.preventDefault();
   }
 
-onSubmit = (event) => {
-  const {
-    username,
-    email,
-    passwordOne,
-  } = this.state;
-
-  const {
-    history,
-  } = this.props;
-
-  auth.doCreateUserWithEmailAndPassword(email, passwordOne)
-    .then(authUser => {
-      this.setState({ ...INITIAL_STATE });
-      history.push(routes.HOME);
-    })
-    .catch(error => {
-      this.setState(byPropKey('error', error));
-    });
-
-  event.preventDefault();
-}
-
-render() {
-    const {
-       username,
-       email,
-       passwordOne,
-       passwordTwo,
-       error,
- } = this.state;
-
- const isInvalid =
-  passwordOne !== passwordTwo ||
-  passwordOne === '' ||
-  email === '' ||
-  username === '';
+  const isInvalid =
+   passwordOne !== passwordTwo ||
+   passwordOne === '' ||
+   email === '' ||
+   username === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      authUser ? <Redirect to={routes.HOME} /> :
+      <form onSubmit={onSubmit}>
         <input
           value={username}
-          onChange={event => this.setState(byPropKey('username', event.target.value))}
+          onChange={event => setUsername(event.target.value)}
           type="text"
           placeholder="Full Name"
         />
         <input
           value={email}
-          onChange={event => this.setState(byPropKey('email', event.target.value))}
+          onChange={event => setEmail(event.target.value)}
           type="text"
           placeholder="Email Address"
         />
         <input
           value={passwordOne}
-          onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
+          onChange={event => setPasswordOne(event.target.value)}
           type="password"
           placeholder="Password"
         />
         <input
           value={passwordTwo}
-          onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
+          onChange={event => setPasswordTwo(event.target.value)}
           type="password"
           placeholder="Confirm Password"
         />
@@ -103,7 +75,6 @@ render() {
       </form>
     );
   }
-}
 
 const SignUpLink = () =>
   <p>

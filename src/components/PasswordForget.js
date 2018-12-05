@@ -1,69 +1,51 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useState } from 'react';
+import { auth } from '../firebase';
+import { Link, /*Redirect*/ } from 'react-router-dom';
 import { withFirebase } from '../firebase/firebase';
 import * as ROUTES from '../constants/routes';
+import "normalize.css";
+import styled from "react-emotion";
 
 const PasswordForgetPage = () => (
   <div>
-    <h1>PasswordForget</h1>
+    <Subtitle>Forgot Password</Subtitle>
     <PasswordForgetForm />
   </div>
 );
 
-const INITIAL_STATE = {
-  email: '',
-  error: null,
-};
+const PasswordForgetFormBase = ({history}) => {
 
-class PasswordForgetFormBase extends Component {
-  constructor(props) {
-    super(props);
+  const [email, setEmail] = useState('')
+  const [error, setError] = useState(null)
 
-    this.state = { ...INITIAL_STATE };
-  }
+  const onSubmit = (event) => {
 
-  onSubmit = event => {
-    const { email } = this.state;
-
-    this.props.firebase
-      .doPasswordReset(email)
-      .then(() => {
-        this.setState({ ...INITIAL_STATE });
-      })
+    auth.doPasswordReset(email)
       .catch(error => {
-        this.setState({ error });
+        setError(error)
       });
 
     event.preventDefault();
-  };
+  }
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  render() {
-    const { email, error } = this.state;
-
-    const isInvalid = email === '';
+  const isInvalid = email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <form onSubmit={onSubmit}>
+        <Input
           name="email"
-          value={this.state.email}
-          onChange={this.onChange}
+          value={email}
+          onChange={event => setEmail(event.target.value)}
           type="text"
           placeholder="Email Address"
         />
-        <button disabled={isInvalid} type="submit">
+        <ResetButton disabled={isInvalid} type="submit">
           Reset My Password
-        </button>
+        </ResetButton>
 
         {error && <p>{error.message}</p>}
       </form>
     );
-  }
 }
 
 const PasswordForgetLink = () => (
@@ -71,6 +53,26 @@ const PasswordForgetLink = () => (
     <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
   </p>
 );
+
+const Subtitle = styled("h2")({
+  textAlign: "center"
+});
+
+const Input = styled("input")({
+  textAlign: 'center'
+  // background: "rgba(255,255,255,.3)",
+  // padding: 5,
+  // width: "100%",
+  // border: "none",
+  // fontWeight: 600,
+  // borderRadius: 4,
+  // margin: "-2px 0px -2px -5px",
+  // outline: "none"
+});
+
+const ResetButton = styled('button')({
+  textAlign: 'center'
+})
 
 export default PasswordForgetPage;
 

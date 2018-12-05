@@ -141,7 +141,7 @@ const App = () => {
                 render={props => (
                   <React.Fragment>
                     <Description>
-                      Full-featured Grocery List app written partly with React Hooks.{" "}
+                      Full-featured Grocery List app written entirely with React Hooks. Please sign in to continue!{" "}
                     </Description>
                   </React.Fragment>
                 )}
