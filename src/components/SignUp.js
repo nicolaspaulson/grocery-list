@@ -7,6 +7,7 @@ import {
 import { UserContext } from './App'
 import { auth } from "../firebase"
 import * as routes from '../constants/routes';
+import styled from 'react-emotion'
 
 const SignUpPage = ({ history }) =>
   <div>
@@ -77,11 +78,18 @@ const SignUpForm = ({history}) => {
   }
 
 const SignUpLink = () =>
-  <p>
+  <Wrapper>
     Don't have an account?
-    {' '}
     <Link to={routes.SIGN_UP}>Sign Up</Link>
-  </p>
+  </Wrapper>
+
+const Wrapper = styled("div")({
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
+    marginTop: 30,
+    marginBottom: 30
+  });
 
 export default withRouter(SignUpPage);
 

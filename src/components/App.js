@@ -7,11 +7,9 @@ import {
 import { firebase } from "../firebase"
 import { database } from "../firebase/firebase"
 import Navigation from "./Navigation";
-import LandingPage from './Landing';
 import SignUpPage from './SignUp';
 import SignInPage from './SignIn';
 import PasswordForgetPage from './PasswordForget';
-import HomePage from './Home';
 import AccountPage from './Account';
 import * as routes from '../constants/routes';
 import "normalize.css";
@@ -126,16 +124,12 @@ const App = () => {
   };
 //console.log(props)
   return (
-    <div className="App" /*style={mainStyle}*/>
+    <div className="App" /*style={{backgroundColor: '#82A3A1'}}*/>
       <UserContext.Provider value={authUser}>
         <TodosContext.Provider value={{ todos, dispatch }}>
-          <Title>Grocery Buddy!</Title>
           <Router>
             <div>
               <Navigation authUser={authUser} />
-
-              <hr/>
-
               <Route
                 exact path={routes.LANDING}
                 render={props => (
@@ -182,10 +176,6 @@ const App = () => {
     </div>
   );
 };
-
-const Title = styled("h1")({
-  textAlign: "center"
-});
 
 const Description = styled('p')({
   textAlign: 'center'

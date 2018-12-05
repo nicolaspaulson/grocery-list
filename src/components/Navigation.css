@@ -1,0 +1,45 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #233D4D;
+  top: 0;
+  width: 100%;
+  display: flex;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+li a {
+  display: flex;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #377771;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+li {
+  border-right: 1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+  margin-left: auto;
+}
