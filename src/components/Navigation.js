@@ -14,7 +14,7 @@ const Navigation = ({ authUser }) =>
 
 const NavigationAuth = () =>
   <ul>
-    <li><Link to={routes.LANDING}>Grocery Buddy</Link></li>
+    <li><Link to={routes.LANDING}><img src="grocery-bag.ico" width="32" height="32" alt="grocery-bag-icon"></img>Grocery Buddy</Link></li>
     <li><Link to={routes.HOME}>Home</Link></li>
     <li><Link to={routes.ACCOUNT}>Account</Link></li>
     <li><SignOutButton /></li>
