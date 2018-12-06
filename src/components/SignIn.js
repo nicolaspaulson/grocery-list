@@ -11,7 +11,6 @@ const SignInPage = ({ history }) =>
   <div>
     <Subtitle>Sign In</Subtitle>
     <SignInForm history={history} />
-    <SignUpLink />
   </div>
 
 const SignInForm = ({history}) => {
@@ -53,11 +52,12 @@ const SignInForm = ({history}) => {
           type="password"
           placeholder="Password"
         />
+        <PasswordForgetLink />
         <p />
         <SignInButton disabled={isInvalid} type="submit">
           Sign In
         </SignInButton>
-        <PasswordForgetLink />
+        <SignUpLink />
         { error && <p>{error.message}</p> }
       </Wrapper>
     </OuterWrapper>
@@ -101,10 +101,13 @@ const SignInButton = styled("button")({
   textAlign: "center",
   justifyContent: "center",
   fontWeight: 600,
-  border: "3px solid rgb(218, 218, 218)",
+  border: "none",
   padding: 5,
   margin: "-2px 0px -2px -5px",
   outline: "none",
+  '&:enabled':{
+    backgroundColor: "#9FC490"
+  },
   '&:hover':{
     backgroundColor: "#C0DFA1"
       },

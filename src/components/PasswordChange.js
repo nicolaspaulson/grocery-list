@@ -45,9 +45,9 @@ const PasswordChangeForm = ({history}) => {
             placeholder="Confirm New Password"
           />
           <p />
-          <ResetButton disabled={isInvalid} type="submit">
-            Reset My Password
-          </ResetButton>
+          <UpdateButton disabled={isInvalid} type="submit">
+            Update My Password
+          </UpdateButton>
           {successMessage && <p>{successMessage}</p>}
           {error && <p>{error.message}</p>}
         </Wrapper>
@@ -84,15 +84,18 @@ const OuterWrapper = styled("div")({
   flexDirection: "row",
 });
 
-const ResetButton = styled("button")({
+const UpdateButton = styled("button")({
   display: "flex",
   textAlign: "center",
   justifyContent: "center",
   fontWeight: 600,
-  border: "3px solid rgb(218, 218, 218)",
+  border: "none",
   padding: 5,
   margin: "-2px 0px -2px -5px",
   outline: "none",
+  '&:enabled':{
+    backgroundColor: "#9FC490"
+  },
   '&:hover':{
     backgroundColor: "#C0DFA1"
       },

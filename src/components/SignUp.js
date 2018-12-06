@@ -84,10 +84,9 @@ const SignUpForm = ({history}) => {
   }
 
 const SignUpLink = () =>
-  <Wrapper>
-    Don't have an account?
-    <Link to={routes.SIGN_UP}>Sign Up</Link>
-  </Wrapper>
+  <p>
+    Don't have an account? {' '}<Link to={routes.SIGN_UP}>Sign Up</Link>
+  </p>
 
   const Subtitle = styled("h3")({
     textAlign: "center"
@@ -126,10 +125,13 @@ const SignUpLink = () =>
     textAlign: "center",
     justifyContent: "center",
     fontWeight: 600,
-    border: "3px solid rgb(218, 218, 218)",
+    border: "none",
     padding: 5,
     margin: "-2px 0px -2px -5px",
     outline: "none",
+    '&:enabled':{
+      backgroundColor: "#9FC490"
+    },
     '&:hover':{
       backgroundColor: "#C0DFA1"
         },
