@@ -121,7 +121,8 @@ const InnerWrapper = styled("div")(
 );
 
 const Text = styled("span")(({ done }) => ({
-  textDecoration: done ? "line-through" : "none"
+  textDecoration: done ? "line-through" : "none",
+  wordBreak: 'break-word'
 }));
 
 const Input = styled("input")({
