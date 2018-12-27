@@ -33,7 +33,10 @@ const Wrapper = styled("div")({
   width: "100%",
   justifyContent: "center",
   marginTop: 30,
-  marginBottom: 30
+  marginBottom: 30,
+  '@media (max-width: 700px)': {
+    padding: '0px 10px'
+  }
 });
 
 const Input = styled("input")({

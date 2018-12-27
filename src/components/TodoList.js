@@ -17,7 +17,10 @@ const TodoList = ({todos}) => {
 const Wrapper = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center'
+  alignItems: 'center',
+  '@media (max-width: 700px)': {
+    padding: '0px 10px'
+  }
 })
 
 export default TodoList

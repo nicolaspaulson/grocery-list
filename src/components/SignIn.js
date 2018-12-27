@@ -71,12 +71,13 @@ const Subtitle = styled("h3")({
 const Input = styled("input")({
   textAlign: 'center',
   background: "rgba(255,255,255,.3)",
-  padding: 8,
+  padding: '0px 8px',
   border: "3px solid rgb(218, 218, 218)",
   borderRadius: 6,
   fontWeight: 600,
   margin: "-2px 0px -2px -5px",
-  outline: "none"
+  outline: "none",
+  height: 40
 });
 
 const Wrapper = styled("form")({
@@ -86,7 +87,10 @@ const Wrapper = styled("form")({
   marginTop: 30,
   marginBottom: 30,
   flexDirection: "column",
-  maxWidth: 400
+  maxWidth: 400,
+  '@media (max-width: 700px)': {
+    padding: '0px 10px'
+  }
 });
 
 const OuterWrapper = styled("div")({
@@ -94,6 +98,9 @@ const OuterWrapper = styled("div")({
   width: "100%",
   justifyContent: "center",
   flexDirection: "row",
+  '@media (max-width: 700px)': {
+    padding: '0px 10px'
+  }
 });
 
 const SignInButton = styled("button")({
@@ -116,6 +123,9 @@ const SignInButton = styled("button")({
     '&:hover': {
       backgroundColor: "buttonface",
     }
+  },
+  '@media (max-width: 700px)': {
+    padding: '5px 10px'
   }
 })
 

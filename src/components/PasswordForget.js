@@ -52,7 +52,9 @@ const PasswordForgetFormBase = ({history}) => {
 }
 
 const PasswordForgetLink = () => (
-    <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
+    <p>
+      <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
+    </p>
 );
 
 const Subtitle = styled("h2")({
@@ -73,7 +75,10 @@ const Wrapper = styled("form")({
   marginTop: 30,
   marginBottom: 30,
   flexDirection: "column",
-  maxWidth: 400
+  maxWidth: 400,
+  '@media (max-width: 700px)': {
+    padding: '0px 10px'
+  }
 });
 
 const Input = styled("input")({

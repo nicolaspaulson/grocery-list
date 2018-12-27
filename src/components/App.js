@@ -134,9 +134,15 @@ const App = () => {
                 exact path={routes.LANDING}
                 render={props => (
                   <React.Fragment>
-                    <Description>
-                      Full-featured Grocery List app written entirely with React Hooks. Please sign in to continue!{" "}
-                    </Description>
+                    {authUser ?
+                      <Description>
+                        Full-featured Grocery List app written entirely with React Hooks. Go to Home Tab to continue!{" "}
+                      </Description>
+                      :
+                      <Description>
+                        Full-featured Grocery List app written entirely with React Hooks. Please sign in to continue!{" "}
+                      </Description>
+                    }
                   </React.Fragment>
                 )}
               />
@@ -178,7 +184,8 @@ const App = () => {
 };
 
 const Description = styled('p')({
-  textAlign: 'center'
+  textAlign: 'center',
+  padding: 2
 })
 
 // const mainStyle = {

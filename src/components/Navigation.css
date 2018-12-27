@@ -43,3 +43,12 @@ li:last-child {
   border-right: none;
   margin-left: auto;
 }
+
+@media (max-width: 700px) {
+  .GBTitle{display: none;}
+
+  li:last-child {
+    border-right: 1px solid #bbb;
+    margin-left: 6;
+  }
+}

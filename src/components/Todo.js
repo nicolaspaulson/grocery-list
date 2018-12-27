@@ -93,7 +93,11 @@ const Editor = ({ text, onBlur }) => {
 
 const Wrapper = styled("div")({
   width: 400,
-  padding: 5
+  padding: 5,
+  '@media (max-width: 700px)': {
+    width: '100%',
+    paddingLeft: 30
+  }
 });
 
 const InnerWrapper = styled("div")(
@@ -167,6 +171,12 @@ const DeleteButton = styled('button')({
   '&:active': {
     '& svg': {
       fill: 'rgb(198, 76, 76)'
+    }
+  },
+  '@media (max-width: 700px)': {
+    opacity: 1,
+    '& svg': {
+      fill: 'rgb(222, 90, 90)'
     }
   }
 })

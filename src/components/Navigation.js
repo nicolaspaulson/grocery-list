@@ -14,7 +14,7 @@ const Navigation = ({ authUser }) =>
 
 const NavigationAuth = () =>
   <ul>
-    <li><Link to={routes.LANDING}><img src="grocery-bag.ico" width="32" height="32" alt="grocery-bag-icon"></img>Grocery Buddy</Link></li>
+    <li><Link to={routes.LANDING}><img src="grocery-bag.ico" width="32" height="32" alt="grocery-bag-icon"></img><span className='GBTitle'>Grocery Buddy</span></Link></li>
     <li><Link to={routes.HOME}>Home</Link></li>
     <li><Link to={routes.ACCOUNT}>Account</Link></li>
     <li style={{ float: 'right'}}><SignOutButton /></li>
@@ -22,7 +22,7 @@ const NavigationAuth = () =>
 
 const NavigationNonAuth = () =>
   <ul>
-    <li><Link to={routes.LANDING}><img src="grocery-bag.ico" width="32" height="32" alt="grocery-bag-icon"></img>Grocery Buddy</Link></li>
+    <li><Link to={routes.LANDING}><img src="grocery-bag.ico" width="32" height="32" alt="grocery-bag-icon"></img><span className='GBTitle'>Grocery Buddy</span></Link></li>
     <li style={{ float: 'right'}}><Link to={routes.SIGN_IN}>Sign In</Link></li>
   </ul>
 

@@ -12,7 +12,7 @@ const AccountPage = () => {
     !authUser ? <Redirect to={routes.LANDING} /> :
     <Wrapper>
       <div>
-        <h1>Account: {authUser.email}</h1>
+        <Title>Account: {authUser.email}</Title>
         <div>
           <Subtitle>Change Password</Subtitle>
           <PasswordChangeForm />
@@ -25,6 +25,12 @@ const AccountPage = () => {
 const Subtitle = styled("h3")({
   textAlign: "center"
 });
+
+const Title = styled("h1")({
+  '@media (max-width: 700px)': {
+    fontSize: 18
+  }
+})
 
 const Wrapper = styled("div")({
   display: "flex",
